@@ -1,7 +1,8 @@
 //c++ turing_increment.cpp
 /* 
  * A program to emulate a Turing machine that increments an
- * integer by one. 
+ * integer by one. Input and output are separated by one '0'
+ * on the output tape.
  * 
  * */
 
@@ -66,7 +67,7 @@ int main(){
 	vector<int> input;
 	
 	//specifiy input number 
-	int initial_number = 10000;
+	int initial_number = 1000;
 	for (int i=0; i<2*initial_number + 10; i++) input.push_back(0);
 	for (int j=3; j<initial_number+3; j++) input[j] = 1;
 	cout << "Input:   ";
