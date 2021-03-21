@@ -12,7 +12,7 @@
 #include <iomanip>
 using namespace std;
 
-vector<int> turing_incrementor(vector<vector<string>> program, int state, int position, vector<int> input, int counter){
+vector<int> turing_incrementor(vector<vector<string>> program, int state, int position, vector<int> input, int& counter){
 	
 	// initialize the result tape as a copy of the input tape
 	vector<int> result;
@@ -72,6 +72,7 @@ int main(){
 	for (int j=3; j<initial_number+3; j++) input[j] = 1;
 	cout << "Input:   ";
 	for (auto u:input) cout << u;
+	cout << endl;
 	//state initialization
 	int state = 1;
 	
@@ -82,8 +83,10 @@ int main(){
 	vector<int> result;
 	
 	result = turing_incrementor(program, state, position, input, counter);
+	
 	cout << endl;
 	cout << "Output:  ";
 	for (auto u:result) cout << u;
+	cout << "Steps: " << counter;
 	return 0;
 }
