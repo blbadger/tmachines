@@ -102,18 +102,16 @@ vector<int> turing_incrementor(vector<vector<string>> program, int state, int po
 int main(){
 	//initialize program for incrementing integers
 	vector<vector<string>> program { 
-		{"PR2", "PL3"}, 
-		{"PR3", "PR2"},
-		{"PR4", "EL5"},
-		{"PL1" ,"PL4"},
-		{"PRH", "EL1"}
+		{"PR2", "PL2"},
+		{"PL1", "PRH"}
 		};
+		
 		
 	//initialize input tape
 	vector<int> input;
 	
 	//specifiy input number 
-	int initial_number = 20000;
+	int initial_number = 5;
 	for (int i=0; i<2*initial_number + 10; i++) input.push_back(0);
 	//cout << "Input:   ";
 	//for (auto u:input) cout << u;
@@ -123,15 +121,15 @@ int main(){
 	//counter initialization
 	int counter = 0;
 	
-	int position = 20000;
+	int position = 5;
 	vector<int> result;
 	
 	result = turing_incrementor(program, state, position, input, counter);
 	cout << endl;
 	cout << "Steps: " << counter;
 	cout << endl;
-	//cout << "Output:  ";
-	//for (auto u:result) cout << u;
+	cout << "Output:  ";
+	for (auto u:result) cout << u;
 	return 0;
 }
 
