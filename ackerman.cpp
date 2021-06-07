@@ -6,14 +6,13 @@ int ackerman(int m, int n) {
 
 	else if (n == 0) return ackerman(m-1, 1);
 	
-	else return ackerman(m-1, ackerman(n, m-1));
+	else return ackerman(m-1, ackerman(m, n-1));
 	
 }
 
 int main() {
-	//std::cout << "1";
-	int m = 1;
-	int n = 3;
+	int m = 4;
+	int n = 1;
 	std::cout << ackerman(m, n);
 	return 0;
 }
