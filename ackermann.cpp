@@ -9,7 +9,7 @@ int ackermann(int m, int n) {
 
 	else if (n == 0) return ackermann(m-1, 1);
 	
-	else return ackermann(m-1, ackermann(m, n-1));
+	else return ackermann(m-1, ackermann(m-1, n-1));
 	
 }
 

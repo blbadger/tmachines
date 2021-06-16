@@ -13,7 +13,6 @@
 using namespace std;
 
 vector<int> turing_incrementor(vector<vector<string>> program, int state, int position, vector<int> input, int& counter){
-	
 	// initialize the result tape as a copy of the input tape
 	vector<int> result;
 	for (auto u: input) result.push_back(u);
@@ -49,7 +48,7 @@ vector<int> turing_incrementor(vector<vector<string>> program, int state, int po
 		}
 		state = stoi(num_string);
 		counter++;
-		if (step[step.size()-2] == 'C' and step[step.size()-1] == '0') {
+		if (step[step.size()-2] == 'C' and step[step.size()-1] == '0'){
 			return result;
 		}
 	}
@@ -58,9 +57,17 @@ vector<int> turing_incrementor(vector<vector<string>> program, int state, int po
 	
 int main(){
 	//initialize program for incrementing integers
-	vector<vector<string>> program { {"C0", "R2"}, {"R3", "R9"}, 
-		{"PL4", "R3"}, {"L5", "L4"}, {"L5", "L6"}, {"R2", "R7"}, 
-		{"R8", "ER7"}, {"R8", "R3"}, {"PR9", "L10"}, {"C0", "ER11"}, 
+	vector<vector<string>> program { 
+		{"C0", "R2"}, 
+		{"R3", "R9"}, 
+		{"PL4", "R3"}, 
+		{"L5", "L4"}, 
+		{"L5", "L6"}, 
+		{"R2", "R7"}, 
+		{"R8", "ER7"}, 
+		{"R8", "R3"}, 
+		{"PR9", "L10"}, 
+		{"C0", "ER11"}, 
 		{"PC0", "R11"} };
 	
 	//initialize input tape

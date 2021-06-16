@@ -61,72 +61,87 @@ vector<int> turing_incrementor(vector<vector<string>> program, int state, int po
 
 }
 
-//Turing machines translated from
-// http://www.logique.jussieu.fr/~michel/ha.html#tm52
+vector<vector<string>> choose_program(int states){
 	
-//  1RB 	1LB 	1LA 	1RH 	
-// two states, two symbols, 6 steps
-//{
-		//{"PR2", "PL2"},
-		//{"PL1", "PRH"}
-		//};
+	vector<vector<string>> program;
+	//Turing machines translated from
+	// http://www.logique.jussieu.fr/~michel/ha.html#tm52
 		
-// 1RB 	1RH 	1LB 	0RC 	1LC 	1LA  
-// three states, two symbol, 21 steps
-//{ 
-		//{"PR2", "PRH"}, 
-		//{"PL2", "ER3"},
-		//{"PL3", "PL1"} 
-		//};
+	//  1RB 	1LB 	1LA 	1RH 	
+	// two states, two symbols, 6 steps, 4 total
+	if (states == 2) {program = {
+			{"PR2", "PL2"},
+			{"PL1", "PRH"}
+			};
+		}
+			
+	// 1RB 	1RH 	1LB 	0RC 	1LC 	1LA  
+	// three states, two symbol, 21 steps, 4 total
+	if (states == 3) {program = { 
+			{"PR2", "PRH"}, 
+			{"PL2", "ER3"},
+			{"PL3", "PL1"} 
+			};
+		}
+			
+	// 1RB 	1LB 	1LA 	0LC 	1RH 	1LD 	1RD 	0RA
+	// four states, two symbols, 107 steps, 13 total
+	if (states == 4) { program = { 
+			{"PR2", "PL2"}, 
+			{"PL1", "EL3"},
+			{"PRH", "PL4"},
+			{"PR4" ,"ER1"}
+			};
+		}
+	//1RB 	1LC 	1RC 	1RB 	1RD 	0LE 	1LA 	1LD 	1RH 	0LA
+	// five states, two symbols, 47176870 steps, 4098 total
+	if (states == 5) { program = { 
+			{"PR2", "PL3"}, 
+			{"PR3", "PR2"},
+			{"PR4", "EL5"},
+			{"PL1" ,"PL4"},
+			{"PRH", "EL1"}
+			};
+		}
 		
-// 1RB 	1LB 	1LA 	0LC 	1RH 	1LD 	1RD 	0RA
-// four states, two symbols, 107 steps
-//{ 
-		//{"PR2", "PL2"}, 
-		//{"PL1", "EL3"},
-		//{"PRH", "PL4"},
-		//{"PR4" ,"ER1"}
-		//};
-		
-//1RB 	1LC 	1RC 	1RB 	1RD 	0LE 	1LA 	1LD 	1RH 	0LA
-// five states, two symbols, 47176870 steps
-//{ 
-		//{"PR2", "PL3"}, 
-		//{"PR3", "PR2"},
-		//{"PR4", "EL5"},
-		//{"PL1" ,"PL4"},
-		//{"PRH", "EL1"}
-		//};
-		
+	return program;
+	}
 
 int main(){
 	//initialize program for incrementing integers
-	vector<vector<string>> program { 
-		{"PR2", "PL2"},
-		{"PL1", "PRH"}
-		};
-		
+	int states = 5;
+	vector<vector<string>> program = choose_program(states);
 		
 	//initialize input tape
 	vector<int> input;
 	
 	//specifiy input number 
-	int initial_number = 5;
+	int initial_number = 10;
+	if (states > 4) {
+		initial_number = 10000;
+	}
 	for (int i=0; i<2*initial_number + 10; i++) input.push_back(0);
-	//cout << "Input:   ";
-	//for (auto u:input) cout << u;
+
 	//state initialization
 	int state = 1;
 	
 	//counter initialization
 	int counter = 0;
 	
-	int position = 5;
+	int position = initial_number;
 	vector<int> result;
 	
 	result = turing_incrementor(program, state, position, input, counter);
 	cout << endl;
 	cout << "Steps: " << counter;
+	cout << endl;
+	
+	// calculate productivity
+	int total = 0;
+	for (int i=0; i < result.size(); i++){
+		if (result[i] == 1) total++;
+	}
+	cout << "Total: " << total;
 	cout << endl;
 	cout << "Output:  ";
 	for (auto u:result) cout << u;
